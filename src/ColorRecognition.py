@@ -43,7 +43,5 @@ def getRowMeanColor(input_row, color_matrix, row_number) -> list:
     return list(map(lambda x : x / denominator, [blue, green, red]))
 
 
-print(getImageMeanRGB('/Users/sgupte/Documents/GitHub/LegoSorter/src/assets/test.png'))
-
 
 
