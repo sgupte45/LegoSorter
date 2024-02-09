@@ -1,5 +1,6 @@
-import numpy as np
+import numpy
 import cv2
+
 
 def getImageMeanRGB(path) -> list:
     frame = cv2.imread(path)
@@ -8,7 +9,7 @@ def getImageMeanRGB(path) -> list:
     canny = cv2.Canny(blurred, 30, 500)
     return getMatrixMeanColor(canny, frame)
 
-def getMatrixMeanColor(mask_matrix, image_matrix):
+def getMatrixMeanColor(mask_matrix, image_matrix) -> list:
     total = [0, 0, 0]
     denominator = 0
     for i, row in  enumerate(mask_matrix):
@@ -22,6 +23,7 @@ def getMatrixMeanColor(mask_matrix, image_matrix):
     total = list(map(lambda x : x / denominator, total))
     return total
 
+# Add check for adjacency to another edge pixel
 def getRowMeanColor(input_row, color_matrix, row_number) -> list:
     red = 0
     blue = 0
