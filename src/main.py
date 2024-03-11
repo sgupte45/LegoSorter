@@ -14,6 +14,5 @@ if __name__ == '__main__':
     canny = ColorRecognition.cannyDetectEdges(test)
     cv2.imshow('thing', test)
     cv2.imshow('cannt', canny)
-
     cv2.waitKey(0)
 
