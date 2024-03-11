@@ -1,12 +1,26 @@
-import numpy
+import numpy as np
 import cv2
+
+
+def cannyDetectEdges(img) -> cv2.Mat:
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+    canny = cv2.Canny(blurred, 30, 200)
+    return canny
+
+#Test the efficacy of this method vs canny edge detection
+def sobelDetectEdges(img) -> cv2.Mat:
+    grad_x = cv2.Sobel(img, cv2.CV_64F, 1, 0)
+    grad_y = cv2.Sobel(img, cv2.CV_64F, 0, 1)
+    grad = np.sqrt(grad_x**2 + grad_y**2)
+    grad_norm = (grad * 255 / grad.max()).astype(np.uint8)
+    return grad_norm
 
 
 def getImageMeanRGB(path) -> list:
     frame = cv2.imread(path)
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
-    canny = cv2.Canny(blurred, 30, 500)
+    sobel = sobelDetectEdges(frame)
+    canny = cannyDetectEdges(sobel)
     return getMatrixMeanColor(canny, frame)
 
 def getMatrixMeanColor(mask_matrix, image_matrix) -> list:
