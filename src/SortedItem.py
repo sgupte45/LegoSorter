@@ -4,3 +4,9 @@ class SortedItem:
     self.shape = shape
     self.index = index
 
+  def getColor(self):
+    return self.color
+  
+  def getShape(self):
+    return self.shape
+
